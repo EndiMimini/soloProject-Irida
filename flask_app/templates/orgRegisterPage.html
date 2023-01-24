@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to DevsOnDeck</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body class="d-flex flex-column">
+    <nav class="navbar navbar-light text-white d-flex justify-content-between p-3 mb-5" style="background-color: #F5B041; font-family: Comic Sans MS;">
+        <h1>DevsOnDeck</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <a class="text-decoration-none p-3" href="/devs/login">Dev Login</a>
+            <a class="text-decoration-none" href="/orgs/login">Org Login</a>
+        </div>
+    </nav>
+    <main>
+        <div class="w-50 m-auto p-5 mb-5 opacity-50" style="background-color: #faf0e6;">
+            <h1 class="text-center text-black">Organization Sign Up</h1>
+            {% with messages = get_flashed_messages(category_filter=["orgSignUp"]) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <h5 class="text-danger">{{message}}</h5>
+                            {% endfor %}
+                        {% endif %}
+            {% endwith %}
+            {% with messages = get_flashed_messages(category_filter=["orgSignUpSuccessful"]) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <h5 class="text-success text-center">{{message}}</h5>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form action="/create_organization", method="post">
+                <div class="form-row">
+                    <label for="orgName">Org Name</label>
+                    <input class="form-control mt-2 mb-2" type="text" name="orgName" placeholder="Enter your organisation's name">
+                </div>
+                <div class="form-row">
+                    {% with messages = get_flashed_messages(category_filter=["orgName"]) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="text-danger">{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-row">
+                            <label for="first_name">First Name</label>
+                            <input class="form-control mt-2 mb-2" type="text" name="first_name" placeholder="Enter your admin name">
+                        </div>
+                        <div class="form-row">
+                            {% with messages = get_flashed_messages(category_filter=["name"]) %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <p class="text-danger">{{message}}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-row">
+                            <label for="last_name">Last Name</label>
+                            <input class="form-control mt-2 mb-2" type="text" name="last_name" placeholder="Enter your admin surname">
+                        </div>
+                        <div class="form-row">
+                            {% with messages = get_flashed_messages(category_filter=["surname"]) %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <p class="text-danger">{{message}}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="email">Contact Email</label>
+                    <input class="form-control mt-2 mb-2" type="email" name="email" placeholder="Enter your email">
+                </div>
+                <div class="form-row">
+                    {% with messages = get_flashed_messages(category_filter=["emailSignUp"]) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="text-danger">{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <div class="form-row">
+                    <label for="orgAddress">Org Address</label>
+                    <input class="form-control mt-2 mb-2" type="text" name="orgAddress" placeholder="Enter your address">
+                </div>
+                <div class="form-row">
+                    {% with messages = get_flashed_messages(category_filter=["orgAddress"]) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="text-danger">{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-row">
+                            <label for="orgCity">Org City</label>
+                            <input class="form-control mt-2 mb-2" type="text" name="orgCity" placeholder="Enter your city">
+                        </div>
+                        <div class="form-row">
+                            {% with messages = get_flashed_messages(category_filter=["orgCity"]) %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <p class="text-danger">{{message}}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <div class="col-8 m-auto">
+                        <div class="form-row">
+                            <label for="state">State</label>
+                            <select class="form-select mt-2 mb-2" name="state" id="countryId">
+                                <option>Select State</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            {% with messages = get_flashed_messages(category_filter=["state"]) %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <p class="text-danger">{{message}}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>    
+                <div class="form-row">
+                    <label for="password">Password</label>
+                    <input class="form-control mt-2 mb-2" type="password" name="password" placeholder="Enter your password">
+                </div>
+                <div class="form-row">
+                    {% with messages = get_flashed_messages(category_filter=["passwordSignUp"]) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="text-danger">{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <div class="form-row">
+                    <label for="confirm_password">Confirm</label>
+                    <input class="form-control mt-2 mb-2" type="password" name="confirm_password" placeholder="Confirm your password">
+                </div>
+                <div class="form-row">
+                    {% with messages = get_flashed_messages(category_filter=["passwordConfirm"]) %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="text-danger">{{message}}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <input class="btn btn-success mb-2 mt-2" type="submit" value="Register">
+            </form>
+            <a class="d-flex justify-content-center p-3" href="/devs/register">Need to Sign Up as a Developer?</a>
+        </div>
+    </main>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/country.js') }}"></script>
+</body>
+</html>

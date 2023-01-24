@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoD Dev Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body class="d-flex flex-column" style="background-color: #faf0e6;">
+    <nav class="navbar navbar-light text-white d-flex justify-content-between p-3" style="background-color: #F5B041; font-family: Comic Sans MS;">
+        <h1>{{loggedOrganization.name}}</h1>
+        <h1>{{positions.name}}</h1>
+        <h1>DevsOnDeck</h1>
+    </nav>
+    <div class=" w-75 m-auto row">
+        <div class="col-6 p-5">
+            <div class="section">
+                <label for="skills">Select from skills:</label>
+                <div class="form-control mt-5" style="height:120px;width:320px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;">
+                    {% for row in skills|batch(4) %}
+                    <div class="d-flex justify-content-between text-dark">
+                        {% for column in row %}
+                        <div>
+                            <a class="text-decoration-none text-dark" href="/add_pos_skill/{{column.id}}">{{column.name}}</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="form-row">
+                {% with messages = get_flashed_messages(category_filter=["skillErr"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class="form-row">
+                {% with messages = get_flashed_messages(category_filter=["selectedSkill"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="col-6 p-5">
+            <p>Required Skills:</p>
+            <div id="devSkills" class="d-flex justify-content-between p-3 mt-5 border border-1">
+                {% for skill in pos_skills %}
+                    <a class="text-decoration-none text-success" href="">{{skill.name}}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

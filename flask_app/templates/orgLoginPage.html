@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to DevsOnDeck</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body class="d-flex flex-column" style="background-color: #faf0e6;">
+    <nav class="navbar navbar-light text-white d-flex justify-content-between p-3" style="background-color: #F5B041; font-family: Comic Sans MS;">
+        <h1>DevsOnDeck</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <a class="p-3 text-decoration-none" href="/devs/register">Dev Registration</a>
+            <a class="text-decoration-none" href="/orgs/register">Org Registration</a>
+        </div>
+    </nav>
+    <div class="w-50 m-auto">
+        <div class="mt-5" style="font-family: Comic Sans MS;">
+            <h1 class="text-center">Welcome Back!</h1>
+            <p>Let's Find You Some Candidates!</p>
+        </div>
+        <form action="/enter_organization", method="post">
+            <div class="form-row">
+                <label for="email">Email</label>
+                <input class="form-control mt-2 mb-2" type="email" name="email" placeholder="Enter your email">
+            </div>
+            <div class="form-row">
+                {% with messages = get_flashed_messages(category_filter=["emailLogIn"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            
+            <div class="form-row">
+                <label for="password">Password</label>
+                <input class="form-control mt-2 mb-2" type="password" name="password" placeholder="Enter your password">
+            </div>
+            <div class="form-row">
+                {% with messages = get_flashed_messages(category_filter=["passwordLogIn"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+            <input class="btn btn-success mb-2 mt-2" type="submit" value="Log In">
+        </form>
+    </div>
+</body>
+</html>
